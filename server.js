@@ -1,8 +1,16 @@
 require("dotenv").config();
 const express=require('express');
+const cors=require('cors');
+const morgan=require('morgan');
 const app=express();
 const dbConnection=require('./db');
 
+//Middlewares
+app.use(cors());
+app.use(morgan('dev'));
+app.use(express.json());
+
+//DB Connection
 dbConnection();
 
 

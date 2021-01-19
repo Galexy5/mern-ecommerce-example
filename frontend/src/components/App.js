@@ -3,7 +3,8 @@ import Navbar from './Navbar';
 import Home from './Home';
 import Women from './Women';
 import Men from './Men';
-import NotFound from './NotFound'
+import Register from './Register';
+import NotFound from './NotFound';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Switch>
           <Route exact path="/"> <Home/></Route>
           <Route path="/women"> <Women/></Route>
+          <Route path="/register"> <Register/></Route>
           <Route path="/men"> <Men/></Route>
           <Route path="*"> <NotFound/></Route>
         </Switch>

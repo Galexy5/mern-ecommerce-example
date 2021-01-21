@@ -1,7 +1,9 @@
-const express= require('express');
-const router=express.Router();
+const express = require('express');
+const router = express.Router();
 const bcrypt = require('bcrypt');
-const User=require('../models/users');
+const User = require('../models/users');
+const jwt = require('jsonwebtoken');
+const { jwtSecret , jwtExpire } = require('../config/keys')
 
 router.post('/register', async (req,res)=>{
     const {username,email,password} = req.body ;
@@ -39,13 +41,39 @@ router.post('/register', async (req,res)=>{
 router.post('/login', async (req,res)=>{
     const {username,password} = req.body
 
-    await User.findOne({username:username}, async (err,user)=>{
-        if(!user){
-            res.json({submitMsg: `There is no such user`})
-        }else{
-            (await bcrypt.compare(password,user.password)) ? res.json({submitMsg: 'You are logged in !!', user_email:user.email}) : res.json({submitMsg: 'Wrong password'})
+
+
+        try {
+            await User.findOne({username:username}, async (err,user)=>{
+                if(!user){
+                    return res.status(401).json({submitMsg: `Invalid credentials`})
+                }else{
+                    if(!await bcrypt.compare(password,user.password)) return res.status(401).json({submitMsg: 'Invalid credentials'})
+                    
+                    const payload={
+                        user: {
+                            _id: user._id
+                        }
+                    }
+        
+                    jwt.sign(payload, jwtSecret , {expiresIn: jwtExpire}, (err,token)=>{
+                        if (err) return console.log('Jwt error: ', err)
+        
+                        const { _id, username, email } = user
+        
+                        res.json({
+                            token,
+                            user: { _id , username , email }
+                        })
+                    } )
+                }
+            })
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({error: `Server error ${error}`})
         }
-    })
+
+  
 })
 
 

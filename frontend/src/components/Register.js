@@ -47,7 +47,7 @@ export default function Register(){
 
     return(
       <>
-        <div className="d-flex vh-100 w-100 align-items-center">
+        <div className="d-flex align-items-center" style={{marginTop:200}}>
         <div className="container w-25">
           <form onSubmit={submitForm}>
             <div className="input-group mb-3 h-25">
@@ -93,7 +93,7 @@ export default function Register(){
                 aria-label="Password" 
                 aria-describedby="password-icon"/>
             </div>
-            <div className={submitMessage==='' ? '' : submitMessage==='This email already exists' ? "alert alert-danger" : "alert alert-success"} role="alert">
+              <div className={submitMessage==='' ? '' : submitMessage==='This email already exists' ? "alert alert-danger" : "alert alert-success"} role="alert">
                   {submitMessage}
               </div>
               <div className={emptyFieldsError==='' ? '' : "alert alert-danger"} role="alert">

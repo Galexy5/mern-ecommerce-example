@@ -8,7 +8,7 @@ export default function Login(){
     password:''
   })
 
-  const [submitMessage,setSubmitMessage]=useState('');
+  const [errorMessage,setErrorMessage]=useState('');
   const {username,password}=formData;
 
   const submitForm=(event)=>{
@@ -20,20 +20,22 @@ export default function Login(){
           username:'',
           password:''
         })
-        setSubmitMessage(response.data.submitMsg)
       })
-      .catch(error=>{console.log('Axios login error: ',error)})
+      .catch(error=>{
+        console.log('Axios login error: ',error)
+        setErrorMessage('Invalid credentials')
+      })
     }
   }
 
   const change=(event)=>{
        setFormData({...formData, [event.target.name]:event.target.value})
-      setSubmitMessage('');
+      setErrorMessage('');
   }
 
     return(
       <>
-        <div className="d-flex vh-100 w-100 align-items-center">
+        <div className="d-flex align-items-center" style={{marginTop:200}}>
         <div className="container w-25">
           <form onSubmit={submitForm}>
             <div className="input-group mb-3 h-25">
@@ -62,8 +64,8 @@ export default function Login(){
                 aria-label="Password" 
                 aria-describedby="password-icon"/>
             </div>
-            <div className={submitMessage==='' ? '' : submitMessage==='You are logged in !!' ? "alert alert-success" : "alert alert-danger"} role="alert">
-                  {submitMessage}
+            <div className={errorMessage==='Invalid credentials' ? "alert alert-danger" : ''} role="alert">
+                  {errorMessage}
               </div>
 
             <button type="submit" className="btn btn-primary w-100">Log in</button>

@@ -1,47 +1,33 @@
 import {useState} from 'react';
-import isEmpty from 'validator/lib/isEmpty';
-import isEmail from 'validator/lib/isEmail';
-import {register} from '../api/auth';
+import {login} from '../api/auth';
 
 
-export default function Register(){
+export default function Login(){
   const [formData,setFormData]=useState({
     username:'',
-    email:'',
     password:''
   })
 
-  const [emptyFieldsError,setEmptyFieldsError]=useState('');
-  const [emailError,setEmailError]=useState('');
   const [submitMessage,setSubmitMessage]=useState('');
-
-  const {username,email,password}=formData;
+  const {username,password}=formData;
 
   const submitForm=(event)=>{
     event.preventDefault();
-    if(isEmpty(username) || isEmpty(email) || isEmpty(password)){
-      setEmptyFieldsError('All fields are required')
-    }else if(!isEmail(email)){
-      setEmailError('Invalid Email');
-      document.getElementById("email").focus();
-    }else{ //SUCCESS
-      register(formData)
+    if(username!=='' && password!=='') { // No empty fields
+      login(formData)
       .then(response=>{
         setFormData({
           username:'',
-          email:'',
           password:''
         })
         setSubmitMessage(response.data.submitMsg)
       })
-      .catch(error=>{console.log('Axios register error: ',error)})
+      .catch(error=>{console.log('Axios login error: ',error)})
     }
   }
 
   const change=(event)=>{
        setFormData({...formData, [event.target.name]:event.target.value})
-      setEmptyFieldsError('')
-      setEmailError('');
       setSubmitMessage('');
   }
 
@@ -63,23 +49,6 @@ export default function Register(){
                 aria-describedby="username-icon"/>
             </div>
 
-            <div className="input-group mb-3">
-              <span className="input-group-text" id="email-icon"><i class="fas fa-envelope"></i></span>
-                <input 
-                type="text" 
-                name="email" 
-                id="email"
-                onChange={change} 
-                value={email} 
-                className="form-control" 
-                placeholder="Email" 
-                aria-label="Email" 
-                aria-describedby="email-icon"/>
-            </div>
-            <div className={emailError==='' ? '' : "alert alert-danger"} role="alert">
-                  {emailError}
-              </div>
-
 
             <div className="input-group mb-3">
               <span className="input-group-text" id="password-icon"><i class="fas fa-lock"></i></span>
@@ -93,13 +62,11 @@ export default function Register(){
                 aria-label="Password" 
                 aria-describedby="password-icon"/>
             </div>
-            <div className={submitMessage==='' ? '' : submitMessage==='This email already exists' ? "alert alert-danger" : "alert alert-success"} role="alert">
+            <div className={submitMessage==='' ? '' : submitMessage==='You are logged in !!' ? "alert alert-success" : "alert alert-danger"} role="alert">
                   {submitMessage}
               </div>
-              <div className={emptyFieldsError==='' ? '' : "alert alert-danger"} role="alert">
-                  {emptyFieldsError}
-              </div>
-            <button type="submit" className="btn btn-primary w-100">Register</button>
+
+            <button type="submit" className="btn btn-primary w-100">Log in</button>
             </form>
             </div>
         
@@ -108,3 +75,4 @@ export default function Register(){
 </>
     );
 }
+

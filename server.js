@@ -11,7 +11,7 @@ const authRoutes=require('./routes/auth');
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
-app.use('/register', authRoutes);
+app.use('/user', authRoutes);
 
 //DB Connection
 dbConnection();

@@ -59,11 +59,11 @@ router.post('/login', async (req,res)=>{
                     jwt.sign(payload, jwtSecret , {expiresIn: jwtExpire}, (err,token)=>{
                         if (err) return console.log('Jwt error: ', err)
         
-                        const { _id, username, email } = user
+                        const { _id, username, email, role } = user
         
                         res.json({
                             token,
-                            user: { _id , username , email }
+                            user: { _id , username , email, role }
                         })
                     } )
                 }

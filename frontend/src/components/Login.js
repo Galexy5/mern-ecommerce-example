@@ -1,5 +1,7 @@
-import {useState} from 'react';
-import {login} from '../api/auth';
+import { useState } from 'react';
+import { login } from '../api/auth';
+import { setAuthentication, isAuthenticated } from '../helpers/auth'
+
 
 
 export default function Login(){
@@ -16,10 +18,14 @@ export default function Login(){
     if(username!=='' && password!=='') { // No empty fields
       login(formData)
       .then(response=>{
-        setFormData({
-          username:'',
-          password:''
-        })
+        setAuthentication(response.data.token,response.data.user);
+
+
+        if(isAuthenticated() && isAuthenticated().role === 1){
+          console.log("Redirect to admin");
+        }else{
+          console.log("Redirect to user")
+        }
       })
       .catch(error=>{
         console.log('Axios login error: ',error)
@@ -39,7 +45,7 @@ export default function Login(){
         <div className="container w-25">
           <form onSubmit={submitForm}>
             <div className="input-group mb-3 h-25">
-              <span className="input-group-text" id="username-icon"><i class="fas fa-user"></i></span>
+              <span className="input-group-text" id="username-icon"><i className="fas fa-user"></i></span>
                 <input 
                 type="text" 
                 name="username" 
@@ -53,7 +59,7 @@ export default function Login(){
 
 
             <div className="input-group mb-3">
-              <span className="input-group-text" id="password-icon"><i class="fas fa-lock"></i></span>
+              <span className="input-group-text" id="password-icon"><i className="fas fa-lock"></i></span>
                 <input 
                 type="password" 
                 name="password" 

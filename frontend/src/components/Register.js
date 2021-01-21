@@ -51,7 +51,7 @@ export default function Register(){
         <div className="container w-25">
           <form onSubmit={submitForm}>
             <div className="input-group mb-3 h-25">
-              <span className="input-group-text" id="username-icon"><i class="fas fa-user"></i></span>
+              <span className="input-group-text" id="username-icon"><i className="fas fa-user"></i></span>
                 <input 
                 type="text" 
                 name="username" 
@@ -64,7 +64,7 @@ export default function Register(){
             </div>
 
             <div className="input-group mb-3">
-              <span className="input-group-text" id="email-icon"><i class="fas fa-envelope"></i></span>
+              <span className="input-group-text" id="email-icon"><i className="fas fa-envelope"></i></span>
                 <input 
                 type="text" 
                 name="email" 
@@ -82,7 +82,7 @@ export default function Register(){
 
 
             <div className="input-group mb-3">
-              <span className="input-group-text" id="password-icon"><i class="fas fa-lock"></i></span>
+              <span className="input-group-text" id="password-icon"><i className="fas fa-lock"></i></span>
                 <input 
                 type="password" 
                 name="password" 

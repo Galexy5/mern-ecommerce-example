@@ -5,14 +5,15 @@ import Women from './Women';
 import Men from './Men';
 import Register from './Register';
 import Login from './Login'
-import UserDashboard from './UserDashboard';
-import AdminDashboard from './AdminDashboard';
-import UserRoute from './UserRoute';
-import AdminRoute from './AdminRoute';
+import UserDashboard from './User/UserDashboard';
+import AdminDashboard from './Admin/AdminDashboard';
+import UserRoute from './User/UserRoute';
+import AdminRoute from './Admin/AdminRoute';
 import NotFound from './NotFound';
 
 
 function App() {
+
   return (
     <div className="App">
       <Router>

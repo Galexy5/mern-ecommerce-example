@@ -1,5 +1,5 @@
 import { Route, Redirect } from 'react-router-dom';
-import { isAuthenticated } from '../helpers/auth';
+import { isAuthenticated } from '../../helpers/auth';
 
 
 export default function AdminRoute({ component: Componnent, ...rest }){

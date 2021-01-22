@@ -1,15 +1,32 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { isAuthenticated } from '../helpers/auth';
 import isEmpty from 'validator/lib/isEmpty';
 import isEmail from 'validator/lib/isEmail';
 import {register} from '../api/auth';
 
 
 export default function Register(){
+
   const [formData,setFormData]=useState({
     username:'',
     email:'',
     password:''
   })
+
+
+  let history = useHistory();
+
+  useEffect(()=>{ //If user is already logged in redirect him on his dashboard
+    if(isAuthenticated() && isAuthenticated().role === 1){
+      //Redirect to admin
+     history.push('/admin/dashboard')
+   }else if (isAuthenticated() && isAuthenticated().role === 0){
+     //Redirect to user
+     history.push('/user/dashboard')
+   }
+  },[history])
+
 
   const [emptyFieldsError,setEmptyFieldsError]=useState('');
   const [emailError,setEmailError]=useState('');
@@ -47,10 +64,10 @@ export default function Register(){
 
     return(
       <>
-        <div className="d-flex align-items-center" style={{marginTop:200}}>
-        <div className="container w-25">
+        <div className="row vh-100 px-3">
+        <div className="col-md-4 mx-auto align-self-center">
           <form onSubmit={submitForm}>
-            <div className="input-group mb-3 h-25">
+            <div className="input-group mb-3">
               <span className="input-group-text" id="username-icon"><i className="fas fa-user"></i></span>
                 <input 
                 type="text" 
@@ -101,6 +118,7 @@ export default function Register(){
               </div>
             <button type="submit" className="btn btn-primary w-100">Register</button>
             </form>
+            <br/><div><p>Already have an account? <Link style={{textDecoration:'none'}} to='/login'>Log in</Link></p></div>
             </div>
         
         </div>

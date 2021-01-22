@@ -46,9 +46,9 @@ router.post('/login', async (req,res)=>{
         try {
             await User.findOne({username:username}, async (err,user)=>{
                 if(!user){
-                    return res.status(401).json({submitMsg: `Invalid credentials`})
+                    return res.status(401).json({errorMsg: `Invalid credentials`})
                 }else{
-                    if(!await bcrypt.compare(password,user.password)) return res.status(401).json({submitMsg: 'Invalid credentials'})
+                    if(!await bcrypt.compare(password,user.password)) return res.status(401).json({errorMsg: 'Invalid credentials'})
                     
                     const payload={
                         user: {

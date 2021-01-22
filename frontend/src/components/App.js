@@ -5,7 +5,12 @@ import Women from './Women';
 import Men from './Men';
 import Register from './Register';
 import Login from './Login'
+import UserDashboard from './UserDashboard';
+import AdminDashboard from './AdminDashboard';
+import UserRoute from './UserRoute';
+import AdminRoute from './AdminRoute';
 import NotFound from './NotFound';
+
 
 function App() {
   return (
@@ -13,12 +18,14 @@ function App() {
       <Router>
       <Navbar/>   
         <Switch>
-          <Route exact path="/"> <Home/></Route>
-          <Route path="/women"> <Women/></Route>
-          <Route path="/user/register"> <Register/></Route>
-          <Route path="/user/login"> <Login/></Route>
-          <Route path="/men"> <Men/></Route>
-          <Route path="*"> <NotFound/></Route>
+          <Route exact path="/" component={Home}/> 
+          <Route exact path="/register" component={Register}/> 
+          <Route exact path="/login" component={Login}/>
+          <UserRoute exact path="/user/dashboard" component={UserDashboard}/>
+          <AdminRoute exact path="/admin/dashboard" component={AdminDashboard}/>
+          <Route exact path="/women" component={Women}/>
+          <Route exact path="/men" component={Men}/>
+          <Route path="*" component={NotFound}/>
         </Switch>
       </Router>
     </div>

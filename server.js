@@ -5,14 +5,16 @@ const morgan=require('morgan');
 const app=express();
 const dbConnection=require('./db');
 const authRoutes=require('./routes/auth');
-// const categoryRoutes=require('./routes/category');
-
+const categoryRoutes=require('./routes/category');
+const womenRoutes=require('./routes/women');
 
 //Middlewares
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use('/', authRoutes);
+app.use('/admin/dashboard', categoryRoutes);
+app.use('/categories/women', womenRoutes);
 
 //DB Connection
 dbConnection();

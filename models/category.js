@@ -4,6 +4,10 @@ const categorySchema = new mongoose.Schema({
     category:{
         type: String,
         required: true
+    },
+    main_category:{
+        type: String,
+        required: true
     }
 }, {timestamps: true});
 

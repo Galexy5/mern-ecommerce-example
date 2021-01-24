@@ -9,8 +9,7 @@ exports.registerController =  async (req, res) => {
     const { username, email, password } = req.body;
 
     await User.findOne({ email: email }, async (err, user) => {
-        if (user)
-            return res.json({ submitMsg: "This email already exists" });
+        if (user) return res.json({ submitMsg: "This email already exists" });
 
         const salt = await bcrypt.genSalt(10);
 
@@ -36,7 +35,6 @@ exports.registerController =  async (req, res) => {
 }
 
 exports.loginController = async (req,res)=>{
-
     const {username,password} = req.body
 
         try {

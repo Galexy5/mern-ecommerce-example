@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { addCategoryrController , } = require('../controllers/category');
+const {addCategoryController} = require('../controllers/category')
 
-router.post('/admin/dashboard/addcategory', addCategoryrController)
+router.post('/', addCategoryController);
 
 
 

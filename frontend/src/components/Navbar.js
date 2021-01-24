@@ -1,15 +1,24 @@
-import React, {Fragment} from 'react';
+import React, {useState,Fragment} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import { isAuthenticated , logout } from '../helpers/auth';
-
+import {womenCategories} from "../api/dropdowns"
 
 function Navbar({history}){
+
+  const [womenLinks,setWomenLinks]= useState([]);
 
   const handleLogout =(event)=>{
       logout(()=>{
         history.push('/')
       })
   }
+
+    const womenLinkClick = () =>{
+        womenCategories().then(response=>{
+          setWomenLinks(response.data[0])
+          
+        })
+    }
 
 
     return(
@@ -26,17 +35,25 @@ function Navbar({history}){
               <li className="nav-item">
                 <Link to='/' className="nav-link active" aria-current="page"><i className="fas fa-home"></i></Link>
               </li>
-              <li className="nav-item">
-                <Link to='/women' className="nav-link ">Women</Link>
+              <li className="nav-item dropdown" onClick={womenLinkClick} >
+                <Link  className="nav-link dropdown-toggle" to="#" id="womenDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Women
+                </Link>
+                <div className="dropdown-menu" aria-labelledby="womenDropdown">
+                  {womenLinks.map(link=>(
+                    <Link key={link._id} className="dropdown-item" href="#">{link.category}</Link>
+                  )
+                  )}
+                </div>
               </li>
               <li className="nav-item">
                 <Link to='/men' className="nav-link">Men</Link>
               </li>
               <li className="nav-item dropdown">
-                <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <Link className="nav-link dropdown-toggle" to="#" id="accessoriesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Accessories
                 </Link>
-                <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <div className="dropdown-menu" aria-labelledby="accessoriesDropdown">
                   <Link className="dropdown-item" href="#">Bracelets</Link>
                   <Link className="dropdown-item" href="#">Handbags</Link>
                   <Link className="dropdown-item" href="#">Belts</Link>

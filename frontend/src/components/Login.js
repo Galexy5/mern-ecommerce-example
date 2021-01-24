@@ -65,7 +65,7 @@ export default function Login(){
           <div className="row px-3 vh-100">
             <div className="col-md-4 mx-auto align-self-center">
               <form onSubmit={submitForm}>
-                <div className="input-group mb-3">
+                <div className="input-group input-group-lg mb-3">
                   <span className="input-group-text" id="username-icon"><i className="fas fa-user"></i></span>
                     <input 
                     type="text" 
@@ -79,7 +79,7 @@ export default function Login(){
                 </div>
 
 
-                <div className="input-group mb-3">
+                <div className="input-group input-group-lg mb-3">
                   <span className="input-group-text" id="password-icon"><i className="fas fa-lock"></i></span>
                     <input 
                     type="password" 
@@ -95,7 +95,7 @@ export default function Login(){
                       {errorMessage}
                   </div>
 
-                <button type="submit" className="btn btn-primary w-100">Log in</button>
+                <button type="submit" className="btn btn-primary btn-lg w-100">Log in</button>
                 
               </form>
                 <br/><div><p>Don't have an account? <Link style={{textDecoration:'none'}} to='/register'>Register here</Link></p></div>

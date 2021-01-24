@@ -27,10 +27,20 @@ function Navbar({history}){
                 <Link to='/' className="nav-link active" aria-current="page"><i className="fas fa-home"></i></Link>
               </li>
               <li className="nav-item">
-                <Link to='/women' className="nav-link">Women</Link>
+                <Link to='/women' className="nav-link ">Women</Link>
               </li>
               <li className="nav-item">
                 <Link to='/men' className="nav-link">Men</Link>
+              </li>
+              <li className="nav-item dropdown">
+                <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Accessories
+                </Link>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <Link className="dropdown-item" href="#">Bracelets</Link>
+                  <Link className="dropdown-item" href="#">Handbags</Link>
+                  <Link className="dropdown-item" href="#">Belts</Link>
+                </div>
               </li>
 
               {!isAuthenticated() && (

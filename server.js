@@ -5,6 +5,7 @@ const morgan=require('morgan');
 const app=express();
 const dbConnection=require('./db');
 const authRoutes=require('./routes/auth');
+// const categoryRoutes=require('./routes/category');
 
 
 //Middlewares

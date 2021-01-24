@@ -35,6 +35,11 @@ export default function Register(){
   const {username,email,password}=formData;
 
   const submitForm=(event)=>{
+    setFormData({
+      username:'',
+      email:'',
+      password:''
+    });
     event.preventDefault();
     if(isEmpty(username) || isEmpty(email) || isEmpty(password)){
       setEmptyFieldsError('All fields are required')
@@ -50,6 +55,8 @@ export default function Register(){
           password:''
         })
         setSubmitMessage(response.data.submitMsg)
+
+        // history.push('/login')
       })
       .catch(error=>{console.log('Axios register error: ',error)})
     }
@@ -67,7 +74,7 @@ export default function Register(){
         <div className="row vh-100 px-3">
         <div className="col-md-4 mx-auto align-self-center">
           <form onSubmit={submitForm}>
-            <div className="input-group mb-3">
+            <div className="input-group input-group-lg mb-3">
               <span className="input-group-text" id="username-icon"><i className="fas fa-user"></i></span>
                 <input 
                 type="text" 
@@ -80,7 +87,7 @@ export default function Register(){
                 aria-describedby="username-icon"/>
             </div>
 
-            <div className="input-group mb-3">
+            <div className="input-group input-group-lg mb-3">
               <span className="input-group-text" id="email-icon"><i className="fas fa-envelope"></i></span>
                 <input 
                 type="text" 
@@ -98,7 +105,7 @@ export default function Register(){
               </div>
 
 
-            <div className="input-group mb-3">
+            <div className="input-group input-group-lg mb-3">
               <span className="input-group-text" id="password-icon"><i className="fas fa-lock"></i></span>
                 <input 
                 type="password" 
@@ -116,7 +123,7 @@ export default function Register(){
               <div className={emptyFieldsError==='' ? '' : "alert alert-danger"} role="alert">
                   {emptyFieldsError}
               </div>
-            <button type="submit" className="btn btn-primary w-100">Register</button>
+            <button type="submit" className="btn btn-primary btn-lg w-100">Register</button>
             </form>
             <br/><div><p>Already have an account? <Link style={{textDecoration:'none'}} to='/login'>Log in</Link></p></div>
             </div>

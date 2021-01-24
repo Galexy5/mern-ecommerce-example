@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import AddCategories from './AddCategories';
+import Category from './Category';
 import AddProducts from './AddProducts';
 import ViewOrders from './ViewOrders';
 
@@ -9,10 +9,10 @@ export default function AdminDashboard(){
 
 
     const handleButtons = (event) =>{
-        if(event.target.id==='addproducts'){
+        if(event.target.id==='products'){
             setOption(AddProducts)
-        }else if(event.target.id==='addcategories'){
-            setOption(AddCategories)
+        }else if(event.target.id==='categories'){
+            setOption(Category)
         }else{
             setOption(ViewOrders)
         }
@@ -28,9 +28,9 @@ export default function AdminDashboard(){
                     
                         <button id='orders'onClick={handleButtons} className="btn btn-primary btn-lg w-100 my-2">My Orders</button>
                         
-                        <button id='addproducts' onClick={handleButtons} className="btn btn-primary btn-lg w-100 my-2">Add Products</button>
+                        <button id='products' onClick={handleButtons} className="btn btn-primary btn-lg w-100 my-2">Products</button>
                        
-                   <button id='addcategories' onClick={handleButtons} className="btn btn-primary btn-lg w-100 my-2">Add Category</button>
+                   <button id='categories' onClick={handleButtons} className="btn btn-primary btn-lg w-100 my-2">Categories</button>
                 </div>
             </div>
                 <div className="col offset-2" id="main">

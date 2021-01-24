@@ -55,8 +55,9 @@ export default function Register(){
           password:''
         })
         setSubmitMessage(response.data.submitMsg)
-
-        // history.push('/login')
+        setTimeout(()=>{
+          history.push('/login')
+        },2000)
       })
       .catch(error=>{console.log('Axios register error: ',error)})
     }

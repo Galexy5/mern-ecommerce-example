@@ -6,7 +6,7 @@ const cookieParser=require('cookie-parser');
 const app=express();
 const dbConnection=require('./db');
 const authRoutes=require('./routes/auth');
-const categoryRoutes=require('./routes/category');
+const adminDashRoutes=require('./routes/adminDashboard');
 const womenRoutes=require('./routes/women');
 
 
@@ -14,10 +14,12 @@ const womenRoutes=require('./routes/women');
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
-app.use('/', authRoutes);
-app.use('/admin/dashboard', categoryRoutes);
-app.use('/categories/women', womenRoutes);
 app.use(cookieParser());
+app.use('/', authRoutes);
+app.use('/admin/dashboard/', adminDashRoutes);
+app.use('/categories/women', womenRoutes);
+
+
 
 //DB Connection
 dbConnection();

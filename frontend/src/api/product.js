@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-export const addCategory= async (data)=>{
+export const createProduct= async (data)=>{
     const config={
         headers:{
             'Content-Type':'application/json'
         }
     }
-    const response = await axios.post('/admin/dashboard/newcategory', data , config);
+    const response = await axios.post('/admin/dashboard/newproduct', data , config);
 
     return response;
 

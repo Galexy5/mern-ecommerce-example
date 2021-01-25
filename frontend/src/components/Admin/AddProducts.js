@@ -1,51 +1,94 @@
-import {useState} from 'react' 
+import {useState} from 'react' ;
+import {createProduct} from '../../api/product';
 
 
 export default function AddProducts(){
 
-    const [sizeInput,setSizeInput] = useState([
+    const [submitMessage,setSubmitMessage]= useState('')
+
+    const [sizeInputs,setSizeInputs] = useState([
         {size:'',quantity:''}
     ])
 
     const [formData,setFormData]=useState({
         mainCategory:'Women',
-        subCategory:'',
+        subCategory:'Sandals',
         productName:'',
         description:'',
         price:'',
     })
 
+    const {mainCategory,subCategory,productName,description,price} = formData; 
+   
 
-     const {mainCategory,subCategory,productName,description,price} = formData; 
+    const addProduct = (event) =>{
+        setFormData(
+            {
+                mainCategory:'Women',
+                subCategory:'Sandals',
+                productName:'',
+                description:'',
+                price:'',
+            }
+        )
+
+        setSizeInputs([{size:'',quantity:''}])
+
+        event.preventDefault();
+            
+            createProduct({
+                form:formData,
+                sizes: sizeInputs
+            }).then(response=>{
+                setFormData(
+                    {
+                        mainCategory:'Women',
+                        subCategory:'Sandals',
+                        productName:'',
+                        description:'',
+                        price:'',
+                    }
+                )
+        
+                setSizeInputs([{size:'',quantity:''}])
+
+                setSubmitMessage(response.data.resp)
+            })
+
+       
+    }
+
+  
 
      const fieldsChange = (event) =>{
-        setFormData({...formData, [event.target.name]:event.target.value})
+
+            setFormData({...formData, [event.target.name]:event.target.value})
+       
      }
 
     const sizeChange =(index,event)=>{
-        const values=[...sizeInput];
+        const values=[...sizeInputs];
         values[index][event.target.name]=event.target.value;
-        
-        setSizeInput(values)
-       console.log(index)
+        setSizeInputs(values)
+
     }
 
     const addSize = ()=>{
-        setSizeInput([...sizeInput, {size:'',quantity:''} ])
+      
+        setSizeInputs([...sizeInputs, {size:'',quantity:''}])
 
-        console.log(sizeInput)
     }
 
     const removeSize = (index)=>{
-        const values= [...sizeInput]
+        const values= [...sizeInputs]
         values.splice(index,1)
 
-         setSizeInput(values);    
+        setSizeInputs(values)  
     }
 
     return (
         <>
-        <form className="w-25">
+        <form className="w-25" onSubmit={addProduct}>
             
             <label><h1>Main Category</h1></label>
             <select name="mainCategory" value={mainCategory} onChange={fieldsChange} className="form-select form-select-lg mb-3" aria-label="mainCategory">
@@ -59,9 +102,9 @@ export default function AddProducts(){
             <label><h1>Sub Category</h1></label>
             <select name="subCategory" value={subCategory} onChange={fieldsChange} className="form-select form-select-lg mb-3" aria-label="subCategory">
 
-                <option selected value="">...</option>
-                <option value="">...</option>
-                <option value="">...</option>
+                <option selected value="sandals">Sandals</option>
+                <option value="boots">Boots</option>
+                <option value="sneakers">Sneakers</option>
             </select>
             <br/>
 
@@ -79,7 +122,7 @@ export default function AddProducts(){
 
             <label><h1>Price</h1></label>
             <div className="">
-                <input type="text" name="price" value={price} onChange={fieldsChange}  className="" style={{width:50}} aria-label="price" aria-describedby="inputGroup-sizing-lg"/><i className="fas fa-euro-sign"/>
+                <input type="number" name="price" value={price} onChange={fieldsChange}  className="" style={{width:50}} aria-label="price" aria-describedby="inputGroup-sizing-lg"/><i className="fas fa-euro-sign"/>
             </div>
             <br/>
 
@@ -96,18 +139,18 @@ export default function AddProducts(){
                 
                 
 
-                {sizeInput.map((inputField,index)=>(
+                {sizeInputs.map((sizeField,index)=>(
                     <div key={index}>
                         
                         <label><h3>Size</h3></label>
-                        <input type="text" name="size" value={inputField.size} onChange={event=>sizeChange(index,event)} style={{width:50}} aria-label="size" aria-describedby="inputGroup-sizing-lg"/>
+                        <input type="text" name="size" value={sizeField.size} onChange={event=>sizeChange(index,event)} style={{width:50}} aria-label="size" aria-describedby="inputGroup-sizing-lg"/>
                         
 
                       
                         <label><h3>Quantity</h3></label>
-                        <input type="number" min='0' max='50' name="quantity" value={inputField.quantity} onChange={event=>sizeChange(index,event)} style={{width:70}} aria-label="quantity" aria-describedby="inputGroup-sizing-lg"/>
+                        <input type="number" min='0' max='50' name="quantity" value={sizeField.quantity} onChange={event=>sizeChange(index,event)} style={{width:70}} aria-label="quantity" aria-describedby="inputGroup-sizing-lg"/>
                         
-                        {sizeInput.length>1 && 
+                        {sizeInputs.length>1 && 
                         (<button type="button" onClick={()=>removeSize(index)} className="btn btn-primary "><i className="fas fa-minus"/></button>) 
         
                     }
@@ -119,7 +162,7 @@ export default function AddProducts(){
                   
            
             <br/>
-            <button type="submit"  className="btn btn-primary btn-lg ">Create product</button>
+            <button type="submit" className="btn btn-primary btn-lg ">Create product</button>
 
 
         </form>

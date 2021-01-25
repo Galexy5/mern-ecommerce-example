@@ -13,14 +13,23 @@ export default function AddCategories(){
     const {mainCategory,newCategory} = category;
 
     const createCategory = (event)=>{
+        
+        setCategory({
+            mainCategory:'Women',
+            newCategory:''
+        })
         event.preventDefault()
+
         if(newCategory!==''){
             addCategory(category)
             .then((response)=>{ //SUCCESS
-                setCategory({...category,[newCategory]:''})
-                console.log({mainCategory})
+                setCategory({
+                    mainCategory:'Women',
+                    newCategory:''
+                })
+                
                 setSubmitMessage(response.data.resp)
-                console.log(response.data.resp)
+
                 
             })
         }

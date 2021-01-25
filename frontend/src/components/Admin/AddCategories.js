@@ -49,7 +49,7 @@ export default function AddCategories(){
             <br/>
             <label><h1>New Category</h1></label>
             <div className="input-group input-group-lg">
-                <input type="text" name="newCategory" value={newCategory} onChange={change}  className="form-control" aria-label="newCategory" aria-describedby="inputGroup-sizing-lg"></input>
+                <input type="text" name="newCategory" value={newCategory} onChange={change}  className="form-control" aria-label="newCategory" aria-describedby="inputGroup-sizing-lg"/>
             </div>
             <br/>
             <button type="submit" className="btn btn-primary btn-lg ">Create Category</button>

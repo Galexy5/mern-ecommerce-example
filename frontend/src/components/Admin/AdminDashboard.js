@@ -5,16 +5,16 @@ import ViewOrders from './ViewOrders';
 
 export default function AdminDashboard(){
 
-    const [ option, setOption ] = useState(ViewOrders);
+    const [ option, setOption ] = useState('orders');
 
 
     const handleButtons = (event) =>{
         if(event.target.id==='products'){
-            setOption(AddProducts)
+            setOption('products')
         }else if(event.target.id==='categories'){
-            setOption(Category)
+            setOption('categories')
         }else{
-            setOption(ViewOrders)
+            setOption('orders')
         }
     }
 
@@ -34,7 +34,7 @@ export default function AdminDashboard(){
                 </div>
             </div>
                 <div className="col offset-2" id="main">
-                    {option}
+                    {option==='orders' ? <ViewOrders/> : option==='products' ? <AddProducts/> : <Category/>}
                     
                 </div>
             </div>

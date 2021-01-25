@@ -1,8 +1,6 @@
 const Category = require('../models/category');
-const jwt = require('jsonwebtoken');
-const { jwtSecret , jwtExpire } = require('../config/keys');
 
-exports.addCategoryController = async (req,res)=>{
+exports.create = async (req,res)=>{
 
     const {mainCategory, newCategory} = req.body;
     

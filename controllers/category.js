@@ -1,6 +1,7 @@
 const Category = require('../models/category');
+const {authenticateJWT} = require('../middlewares/authenticator');
 
-exports.create = async (req,res)=>{
+exports.create = async (req,res , authenticateJWT)=>{
 
     const {mainCategory, newCategory} = req.body;
     

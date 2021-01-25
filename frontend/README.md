@@ -1,4 +1,4 @@
-This is an example of e-commerce using MERN Stack for practice.
+This is an example of e-commerce from scratch using MERN Stack for practice.
 
 Backend: Nodejs, Express, MongoDB, Mongoose , bcrypt (for password encryption)
 

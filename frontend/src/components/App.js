@@ -1,3 +1,4 @@
+import React , {useEffect} from 'react';
 import {BrowserRouter as Router,Route,Switch} from "react-router-dom";
 import Navbar from './Navbar';
 import Home from './Home';
@@ -11,8 +12,17 @@ import UserRoute from './User/UserRoute';
 import AdminRoute from './Admin/AdminRoute';
 import NotFound from './NotFound';
 
+/***REDUX***/
+import {useDispatch} from 'react-redux';
+import {getWomenCategories} from '../redux/actions/categoryActions';
 
 function App() {
+
+const dispatch = useDispatch();
+
+useEffect(()=>{
+  dispatch(getWomenCategories());
+},[dispatch])
 
   return (
     <div className="App">

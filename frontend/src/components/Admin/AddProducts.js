@@ -1,13 +1,17 @@
-import {useState,useEffect} from 'react' ;
+import {useState} from 'react' ;
 import {createProduct} from '../../api/product';
 import isEmpty from 'validator/lib/isEmpty';
-import isInt from 'validator/lib/isInt';
-import {getWomenCategories} from "../../api/category"
+
+/****REDUX****/
+import {useSelector} from 'react-redux';
 
 
 export default function AddProducts(){
 
-    const [womenCats,setWomenCats]= useState(null); //To get women categories
+    /**REDUX GLOBAL STATE PROPERTIES***/
+    const {womenCategories} = useSelector(state=>state.womenCategories) ;
+    
+
     
     const [sizeInputs,setSizeInputs] = useState([
         {size:'',quantity:''}
@@ -25,17 +29,7 @@ export default function AddProducts(){
     const {mainCategory,subCategory,productName,description,price,productPhoto} = formData; 
     const sizes= sizeInputs;
 
-    useEffect(()=>{
-        womenLinkClick();
-      },[])
-      
-    
-        const womenLinkClick = async () =>{
-           await getWomenCategories().then(response=>{
-              setWomenCats(response.data)
-              
-            })
-        }
+
 
     /*****MESSAGES*****/ 
     const [submitMessage,setSubmitMessage]= useState('')
@@ -149,9 +143,9 @@ export default function AddProducts(){
             <br/>
 
             <label><h1>Sub Category</h1></label>
-            <select name="subCategory" value={subCategory} onChange={fieldsChange} onClick={womenLinkClick} className="form-select form-select-lg mb-3" aria-label="subCategory">
+            <select name="subCategory" value={subCategory} onChange={fieldsChange} className="form-select form-select-lg mb-3" aria-label="subCategory">
             <option selected value="choose">Choose sub category</option>
-                {womenCats && womenCats.map(womanCat=>(
+                {womenCategories && womenCategories.map(womanCat=>(
                     <option key={womanCat.id} value={womanCat.category}>{womanCat.sub_category}</option>
                 ))}
 

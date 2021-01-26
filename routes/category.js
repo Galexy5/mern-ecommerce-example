@@ -4,7 +4,7 @@ const CategoryController = require('../controllers/category');
 const {authenticateJWT} = require('../middlewares/authenticator');
 
 
-router.get('/women', authenticateJWT, CategoryController.getWomenCategories);
+router.get('/women', CategoryController.getWomenCategories);
 
 
 

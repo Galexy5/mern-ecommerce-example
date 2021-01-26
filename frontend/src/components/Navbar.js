@@ -1,11 +1,16 @@
-import React, {useState,Fragment, useEffect} from 'react';
+import React, {Fragment} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import { isAuthenticated , logout } from '../helpers/auth';
-import {getWomenCategories} from "../api/category"
+import {useSelector} from 'react-redux';
+
 
 function Navbar({history}){
 
-  const [womenCats,setWomenCats]= useState(null);
+
+    /**REDUX GLOBAL STATE PROPERTIES***/
+    const {womenCategories} = useSelector(state=>state.womenCategories) ;
+
+
 
   const handleLogout =(event)=>{
       logout(()=>{
@@ -13,18 +18,6 @@ function Navbar({history}){
       })
   }
 
-  useEffect(()=>{
-    womenLinkClick();
-  },[])
-  
-
-    const womenLinkClick = async () =>{
-       await getWomenCategories().then(response=>{
-          setWomenCats(response.data)
-          
-        })
-        
-    }
 
 
     return(
@@ -41,12 +34,12 @@ function Navbar({history}){
               <li className="nav-item">
                 <Link to='/' className="nav-link active" aria-current="page"><i className="fas fa-home"></i></Link>
               </li>
-              <li className="nav-item dropdown" onClick={womenLinkClick} >
+              <li className="nav-item dropdown"  >
                 <Link  className="nav-link dropdown-toggle" to="#" id="womenDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Women
                 </Link>
                 <div className="dropdown-menu" aria-labelledby="womenDropdown">
-                  {womenCats && womenCats.map(link=>(
+                  {womenCategories && womenCategories.map(link=>(
                     <Link key={link._id} className="dropdown-item" href="#">{link.sub_category}</Link>
                   )
                   )}

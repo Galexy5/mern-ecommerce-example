@@ -1,12 +1,15 @@
 const mongoose = require('mongoose');
 
 const categorySchema = new mongoose.Schema({
-    category:{
-        type: String,
-        required: true
-    },
+
     main_category:{
         type: String,
+        trim: true,
+        required: true
+    },
+    sub_category:{
+        type: String,
+        trim: true,
         required: true
     }
 }, {timestamps: true});

@@ -7,7 +7,7 @@ const app=express();
 const dbConnection=require('./db');
 const authRoutes=require('./routes/auth');
 const adminDashRoutes=require('./routes/adminDashboard');
-const womenRoutes=require('./routes/women');
+const categoryRoutes=require('./routes/category');
 
 
 //Middlewares
@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/', authRoutes);
 app.use('/admin/dashboard/', adminDashRoutes);
-app.use('/categories/women', womenRoutes);
+app.use('/categories/', categoryRoutes);
 
 
 

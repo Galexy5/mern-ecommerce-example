@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const addCategory= async (data)=>{
+export const createNewCategory= async (data)=>{
     const config={
         headers:{
             'Content-Type':'application/json'
@@ -11,3 +11,19 @@ export const addCategory= async (data)=>{
     return response;
 
     }
+
+    export const getWomenCategories= async ()=>{
+
+    const response = await axios.get('/categories/women' );
+
+    return response;
+
+    }
+
+    export const getMenCategories= async ()=>{
+
+        const response = await axios.get('/categories/men');
+    
+        return response;
+    
+        }

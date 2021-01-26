@@ -1,11 +1,11 @@
-import React, {useState,Fragment} from 'react';
+import React, {useState,Fragment, useEffect} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import { isAuthenticated , logout } from '../helpers/auth';
-import {womenCategories} from "../api/dropdowns"
+import {getWomenCategories} from "../api/category"
 
 function Navbar({history}){
 
-  const [womenLinks,setWomenLinks]= useState([]);
+  const [womenCats,setWomenCats]= useState(null);
 
   const handleLogout =(event)=>{
       logout(()=>{
@@ -13,11 +13,17 @@ function Navbar({history}){
       })
   }
 
-    const womenLinkClick = () =>{
-        womenCategories().then(response=>{
-          setWomenLinks(response.data[0])
+  useEffect(()=>{
+    womenLinkClick();
+  },[])
+  
+
+    const womenLinkClick = async () =>{
+       await getWomenCategories().then(response=>{
+          setWomenCats(response.data)
           
         })
+        
     }
 
 
@@ -40,8 +46,8 @@ function Navbar({history}){
                   Women
                 </Link>
                 <div className="dropdown-menu" aria-labelledby="womenDropdown">
-                  {womenLinks.map(link=>(
-                    <Link key={link._id} className="dropdown-item" href="#">{link.category}</Link>
+                  {womenCats && womenCats.map(link=>(
+                    <Link key={link._id} className="dropdown-item" href="#">{link.sub_category}</Link>
                   )
                   )}
                 </div>

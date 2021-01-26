@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {addCategory} from '../../api/category';
+import {createNewCategory} from '../../api/category';
 
 export default function AddCategories(){
 
@@ -14,14 +14,10 @@ export default function AddCategories(){
 
     const createCategory = (event)=>{
         
-        setCategory({
-            mainCategory:'Women',
-            newCategory:''
-        })
         event.preventDefault()
 
         if(newCategory!==''){
-            addCategory(category)
+            createNewCategory(category)
             .then((response)=>{ //SUCCESS
                 setCategory({
                     mainCategory:'Women',
@@ -31,14 +27,14 @@ export default function AddCategories(){
                 setSubmitMessage(response.data.resp)
 
                 
-            })
+            }).catch(error=>console.log(error))
         }
     }
 
     const change = (event)=>{
-       
-        setCategory({...category,[event.target.name]:event.target.value})
         setSubmitMessage('')
+        setCategory({...category,[event.target.name]:event.target.value})
+        
         
     }
 
@@ -65,7 +61,7 @@ export default function AddCategories(){
          
 
     </form>
-    <div className={submitMessage==='' ? '' : submitMessage==='This category already exists' ? "alert alert-danger" : "alert alert-success"} role="alert">
+              <div className={submitMessage==='' ? '' : submitMessage==='This category already exists' ? "alert alert-danger" : "alert alert-success"} role="alert">
                   {submitMessage}
               </div>
 

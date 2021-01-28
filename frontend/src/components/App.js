@@ -11,10 +11,12 @@ import AdminDashboard from './Admin/AdminDashboard';
 import UserRoute from './User/UserRoute';
 import AdminRoute from './Admin/AdminRoute';
 import NotFound from './NotFound';
+import Product from './Product';
+
 
 /***REDUX***/
 import {useDispatch} from 'react-redux';
-import {getWomenCategories} from '../redux/actions/categoryActions';
+import {getWomenCategories,getMenCategories} from '../redux/actions/categoryActions';
 import { getProducts } from '../redux/actions/productActions'
 
 function App() {
@@ -23,6 +25,10 @@ const dispatch = useDispatch();
 
 useEffect(()=>{
   dispatch(getWomenCategories());
+},[dispatch])
+
+useEffect(()=>{
+  dispatch(getMenCategories());
 },[dispatch])
 
 useEffect(()=>{
@@ -43,6 +49,7 @@ useEffect(()=>{
           <AdminRoute exact path="/admin/dashboard" component={AdminDashboard}/>
           <Route exact path="/women" component={Women}/>
           <Route exact path="/men" component={Men}/>
+          <Route exact path='/product' component={Product}/>
           <Route path="*" component={NotFound}/>
         </Switch>
       </Router>

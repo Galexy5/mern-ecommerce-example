@@ -19,7 +19,7 @@ app.use('/', authRoutes);
 app.use('/admin/dashboard/', adminDashRoutes);
 app.use('/categories/', categoryRoutes);
 app.use('/products', productRoutes);
-app.use('/uploads', express.static('uploads'))
+app.use('/uploads', express.static('uploads'))   //Middleware so that react can get photos from uploads folder
 
 
 //DB Connection

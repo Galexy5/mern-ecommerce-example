@@ -4,10 +4,10 @@ exports.create= async (req,res)=>{
 
 
 
-    const {mainCategory,subCategory,productName,description,price} = req.body
+    const {mainCategory,subCategory,productName,description,price,sizes} = req.body
     const {filename} = req.file
-    const {sizes} = JSON.parse(req.body.sizes)
 
+    
 
 
     const new_product = new Product({
@@ -17,7 +17,7 @@ exports.create= async (req,res)=>{
         sub_category:subCategory,
         price:price,
         productPhoto: filename,
-        sizes:sizes
+        sizes: JSON.parse(sizes)
     })
 
     await new_product.save().then(()=>{

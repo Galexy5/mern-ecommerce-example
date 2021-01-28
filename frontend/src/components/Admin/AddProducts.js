@@ -10,11 +10,11 @@ export default function AddProducts(){
 
     /**REDUX GLOBAL STATE PROPERTIES***/
     const {womenCategories} = useSelector(state=>state.womenCategories) ;
-    
+    const {menCategories } = useSelector(state=>state.menCategories) ;
 
     
     const [sizeInputs,setSizeInputs] = useState([
-        {size:'',quantity:''}
+        {size:0,quantity:1}
     ])
 
     const [formData,setFormData]=useState({
@@ -44,7 +44,7 @@ export default function AddProducts(){
     const addProduct = (event) =>{
         event.preventDefault();
         const emptySizes=sizes.some(sizeField=>{
-            if(isEmpty(sizeField.size) || isEmpty(sizeField.quantity)){
+            if(sizeField.size===0 || sizeField.quantity===0){
                 return true
             }
         })
@@ -68,8 +68,8 @@ export default function AddProducts(){
             createProduct(productData).then(response=>{
                 setFormData(
                     {
-                        mainCategory:'Women',
-                        subCategory:'',
+                        mainCategory:mainCategory,
+                        subCategory: subCategory,
                         productName:'',
                         description:'',
                         price:'',
@@ -77,9 +77,10 @@ export default function AddProducts(){
                     }
                 )
         
-                setSizeInputs([{size:'',quantity:''}])
+                setSizeInputs([{size:0,quantity:1}])
 
                 setSubmitMessage(response.data.resp)
+                
             }).catch(error=>console.log(error))
         }
         
@@ -105,18 +106,19 @@ export default function AddProducts(){
      }
 
     const sizeChange =(index,event)=>{
+
         setSubmitMessage('');
         setEmptyFieldsError('');
         const values=[...sizeInputs];
-        values[index][event.target.name]=event.target.value;
+        values[index][event.target.name]=event.target.value==='' ? event.target.value : parseInt(event.target.value);
         setSizeInputs(values)
-
+console.log(values)
     }
 
     const addSize = ()=>{
         setSubmitMessage('');
         setEmptyFieldsError('');
-        setSizeInputs([...sizeInputs, {size:'',quantity:''}])
+        setSizeInputs([...sizeInputs, {size:0,quantity:1}])
 
     }
 
@@ -151,9 +153,14 @@ export default function AddProducts(){
             <label><h1>Sub Category</h1></label>
             <select name="subCategory" value={subCategory} onChange={fieldsChange} className="form-select form-select-lg mb-3" aria-label="subCategory">
             <option selected value="choose">Choose sub category</option>
-                {womenCategories && womenCategories.map(womanCat=>(
+            
+                {mainCategory==='Women' ? womenCategories && womenCategories.map(womanCat=>(
                     <option key={womanCat.id} value={womanCat.category}>{womanCat.sub_category}</option>
-                ))}
+                )) :
+                menCategories && menCategories.map(manCat=>(
+                    <option key={manCat.id} value={manCat.category}>{manCat.sub_category}</option>
+                ))
+                }
 
             </select>
             <br/>

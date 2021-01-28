@@ -20,7 +20,7 @@ export default function AddCategories(){
             createNewCategory(category)
             .then((response)=>{ //SUCCESS
                 setCategory({
-                    mainCategory:'Women',
+                    mainCategory:mainCategory,
                     newCategory:''
                 })
                 

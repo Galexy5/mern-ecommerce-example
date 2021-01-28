@@ -9,6 +9,7 @@ function Navbar({history}){
 
     /**REDUX GLOBAL STATE PROPERTIES***/
     const {womenCategories} = useSelector(state=>state.womenCategories) ;
+    const {menCategories} = useSelector(state=>state.menCategories);
 
 
 
@@ -34,28 +35,39 @@ function Navbar({history}){
               <li className="nav-item">
                 <Link to='/' className="nav-link active" aria-current="page"><i className="fas fa-home"></i></Link>
               </li>
-              <li className="nav-item dropdown"  >
-                <Link  className="nav-link dropdown-toggle" to="#" id="womenDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+              <li className="nav-item dropdown" >
+                <Link  className="nav-link dropdown-toggle" to='' id="womenDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Women
                 </Link>
                 <div className="dropdown-menu" aria-labelledby="womenDropdown">
                   {womenCategories && womenCategories.map(link=>(
-                    <Link key={link._id} className="dropdown-item" href="#">{link.sub_category}</Link>
+                    <Link key={link._id} className="dropdown-item" to=''>{link.sub_category}</Link>
                   )
                   )}
                 </div>
               </li>
-              <li className="nav-item">
-                <Link to='/men' className="nav-link">Men</Link>
+
+              <li className="nav-item dropdown"  >
+                <Link  className="nav-link dropdown-toggle" to='' id="menDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Men
+                </Link>
+                <div className="dropdown-menu" aria-labelledby="womenDropdown">
+                  {menCategories && menCategories.map(link=>(
+                    <Link key={link._id} className="dropdown-item" to=''>{link.sub_category}</Link>
+                  )
+                  )}
+                </div>
               </li>
+
               <li className="nav-item dropdown">
-                <Link className="nav-link dropdown-toggle" to="#" id="accessoriesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <Link className="nav-link dropdown-toggle" to='' id="accessoriesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Accessories
                 </Link>
                 <div className="dropdown-menu" aria-labelledby="accessoriesDropdown">
-                  <Link className="dropdown-item" href="#">Bracelets</Link>
-                  <Link className="dropdown-item" href="#">Handbags</Link>
-                  <Link className="dropdown-item" href="#">Belts</Link>
+                  <Link className="dropdown-item" to=''>Bracelets</Link>
+                  <Link className="dropdown-item" to=''>Handbags</Link>
+                  <Link className="dropdown-item" to=''>Belts</Link>
                 </div>
               </li>
 

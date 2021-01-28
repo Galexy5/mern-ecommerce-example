@@ -12,18 +12,18 @@ export const createNewCategory= async (data)=>{
 
     }
 
-    export const getWomenCategories= async ()=>{
+    // export const getWomenCategories= async ()=>{
 
-    const response = await axios.get('/categories/women' );
+    // const response = await axios.get('/categories/women' );
 
-    return response;
+    // return response;
 
-    }
+    // }
 
-    export const getMenCategories= async ()=>{
+    // export const getMenCategories= async ()=>{
 
-        const response = await axios.get('/categories/men');
+    //     const response = await axios.get('/categories/men');
     
-        return response;
+    //     return response;
     
-        }
+    //     }

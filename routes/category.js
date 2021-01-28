@@ -6,6 +6,8 @@ const {authenticateJWT} = require('../middlewares/authenticator');
 
 router.get('/women', CategoryController.getWomenCategories);
 
+router.get('/men', CategoryController.getMenCategories);
+
 
 
 

@@ -34,3 +34,11 @@ exports.getWomenCategories= async (req,res)=>{
         res.json(womenCategories)
     })
 }
+
+exports.getMenCategories= async (req,res)=>{
+
+    await Category.find({main_category:'Men'},(err,MenCategories)=>{
+        
+        res.json(MenCategories)
+    })
+}

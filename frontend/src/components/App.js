@@ -15,6 +15,7 @@ import NotFound from './NotFound';
 /***REDUX***/
 import {useDispatch} from 'react-redux';
 import {getWomenCategories} from '../redux/actions/categoryActions';
+import { getProducts } from '../redux/actions/productActions'
 
 function App() {
 
@@ -23,6 +24,12 @@ const dispatch = useDispatch();
 useEffect(()=>{
   dispatch(getWomenCategories());
 },[dispatch])
+
+useEffect(()=>{
+  dispatch(getProducts());
+},[dispatch])
+
+
 
   return (
     <div className="App">

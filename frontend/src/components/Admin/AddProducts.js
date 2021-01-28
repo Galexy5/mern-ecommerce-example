@@ -69,7 +69,7 @@ export default function AddProducts(){
                 setFormData(
                     {
                         mainCategory:'Women',
-                        subCategory:'Sandals',
+                        subCategory:'',
                         productName:'',
                         description:'',
                         price:'',
@@ -132,6 +132,12 @@ export default function AddProducts(){
     return (
         <>
         <form className="w-25" onSubmit={addProduct}>
+
+            <label class="custom-file-label" for="customFile"><h1>Upload Photo</h1></label>
+            <div className="custom-file">
+                <input type="file" name="productPhoto" onChange={productPhotoChange} class="custom-file-input" id="productPhoto"/>
+            </div>
+            <br/>
             
             <label><h1>Main Category</h1></label>
             <select name="mainCategory" value={mainCategory} onChange={fieldsChange} className="form-select form-select-lg mb-3" aria-label="mainCategory">
@@ -168,14 +174,7 @@ export default function AddProducts(){
             <div className="">
                 <input type="number" min='1' name="price" value={price} onChange={fieldsChange}  className="" style={{width:50}} aria-label="price" aria-describedby="inputGroup-sizing-lg"/><i className="fas fa-euro-sign"/>
             </div>
-            <br/>
 
-
-            <label class="custom-file-label" for="customFile"><h1>Upload Photo</h1></label>
-            <div className="custom-file">
-                <input type="file" name="productPhoto" onChange={productPhotoChange} class="custom-file-input" id="productPhoto"/>
-            </div>
-            <br/>
             <br/>
 
             <label><h1>Sizes</h1></label>

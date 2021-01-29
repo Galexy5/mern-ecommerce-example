@@ -12,7 +12,7 @@ import UserRoute from './User/UserRoute';
 import AdminRoute from './Admin/AdminRoute';
 import NotFound from './NotFound';
 import Product from './Product';
-
+import Products from './Products';
 
 /***REDUX***/
 import {useDispatch} from 'react-redux';
@@ -50,6 +50,7 @@ useEffect(()=>{
           <Route exact path="/women" component={Women}/>
           <Route exact path="/men" component={Men}/>
           <Route exact path='/product' component={Product}/>
+          <Route exact path='/products' component={Products}/>
           <Route path="*" component={NotFound}/>
         </Switch>
       </Router>

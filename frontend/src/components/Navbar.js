@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import { isAuthenticated , logout } from '../helpers/auth';
 import {useSelector} from 'react-redux';
+import logo from '../images/logo.jpg';
 
 
 function Navbar({history}){
@@ -24,9 +25,9 @@ function Navbar({history}){
     return(
 <>
 
-<nav className="navbar fixed-top navbar-expand-lg navbar-light bg-info">
+<nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light fs-5  ">
   <div className="container-fluid">
-  <Link to='/' className="navbar-brand">Logo</Link>
+  <Link to='/' className="navbar-brand"><img src={logo} alt="logo" style={{borderRadius:'50%', width:80}} /></Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
@@ -46,7 +47,10 @@ function Navbar({history}){
           <ul className="dropdown-menu" aria-labelledby="womenDropdown">
             <li>
             {womenCategories && womenCategories.map(link=>(
-                    <Link key={link._id} className="dropdown-item" to=''>{link.sub_category}</Link>
+                    <Link key={link._id} className="dropdown-item" 
+                    to={{pathname: '/products', state:{mainCategory: link.main_category,subCategory: link.sub_category}}}>
+                      {link.sub_category}
+                      </Link>
                   )
                   )}
             </li>
@@ -62,7 +66,10 @@ function Navbar({history}){
           <ul className="dropdown-menu" aria-labelledby="menDropdown">
             <li>
             {menCategories && menCategories.map(link=>(
-                    <Link key={link._id} className="dropdown-item" to=''>{link.sub_category}</Link>
+                    <Link key={link._id} className="dropdown-item" 
+                    to={{pathname: '/products', state:{mainCategory: link.main_category,subCategory: link.sub_category}}}>
+                      {link.sub_category}
+                      </Link>
                   )
                   )}
             </li>

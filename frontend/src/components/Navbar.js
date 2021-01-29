@@ -22,56 +22,70 @@ function Navbar({history}){
 
 
     return(
+<>
 
-      <nav className="navbar fixed-top navbar-expand-lg navbar-info bg-light">
-        <div className="container-fluid">
-          <Link to='/' className="navbar-brand">Logo</Link>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
+<nav className="navbar fixed-top navbar-expand-lg navbar-light bg-info">
+  <div className="container-fluid">
+  <Link to='/' className="navbar-brand">Logo</Link>
+    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li className="nav-item">
+        <Link to='/' className="nav-link active" aria-current="page"><i className="fas fa-home"></i></Link>
+        </li>
 
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link to='/' className="nav-link active" aria-current="page"><i className="fas fa-home"></i></Link>
-              </li>
 
-              <li className="nav-item dropdown" >
-                <Link  className="nav-link dropdown-toggle" to='' id="womenDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Women
-                </Link>
-                <div className="dropdown-menu" aria-labelledby="womenDropdown">
-                  {womenCategories && womenCategories.map(link=>(
+        <li className="nav-item dropdown">
+       
+          <a className="nav-link dropdown-toggle" href="" id="womenDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Women
+          </a>
+         
+          <ul className="dropdown-menu" aria-labelledby="womenDropdown">
+            <li>
+            {womenCategories && womenCategories.map(link=>(
                     <Link key={link._id} className="dropdown-item" to=''>{link.sub_category}</Link>
                   )
                   )}
-                </div>
-              </li>
+            </li>
+          </ul>
+        </li>
 
-              <li className="nav-item dropdown"  >
-                <Link  className="nav-link dropdown-toggle" to='' id="menDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Men
-                </Link>
-                <div className="dropdown-menu" aria-labelledby="womenDropdown">
-                  {menCategories && menCategories.map(link=>(
+        <li className="nav-item dropdown">
+       
+          <a className="nav-link dropdown-toggle" href="#" id="menDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Men
+          </a>
+         
+          <ul className="dropdown-menu" aria-labelledby="menDropdown">
+            <li>
+            {menCategories && menCategories.map(link=>(
                     <Link key={link._id} className="dropdown-item" to=''>{link.sub_category}</Link>
                   )
                   )}
-                </div>
-              </li>
+            </li>
+          </ul>
+        </li>
 
-              <li className="nav-item dropdown">
-                <Link className="nav-link dropdown-toggle" to='' id="accessoriesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Accessories
-                </Link>
-                <div className="dropdown-menu" aria-labelledby="accessoriesDropdown">
-                  <Link className="dropdown-item" to=''>Bracelets</Link>
-                  <Link className="dropdown-item" to=''>Handbags</Link>
-                  <Link className="dropdown-item" to=''>Belts</Link>
-                </div>
-              </li>
+        <li className="nav-item dropdown">
+       
+       <a className="nav-link dropdown-toggle" href="#" id="accessoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+       Accessories
+       </a>
+      
+       <ul className="dropdown-menu" aria-labelledby="accessoriessDropdown">
+         <li>
+         <a href="" className="dropdown-item">Bracelets</a>
+         </li>
+         <li>
+         <a href="" className="dropdown-item">Handbags</a>
+         </li>
+       </ul>
+     </li>
 
-              {!isAuthenticated() && (
+     {!isAuthenticated() && (
                 <Fragment>
                     <li className="nav-item">
                       <Link to='/login' className="nav-link">Log in/Register</Link>
@@ -95,11 +109,14 @@ function Navbar({history}){
               ) }
 
 
-            </ul>
-          </div>
-        </div>
-      </nav>
 
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+</>
     )
 }
 

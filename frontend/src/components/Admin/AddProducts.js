@@ -43,7 +43,7 @@ export default function AddProducts(){
 
     const addProduct = (event) =>{
         event.preventDefault();
-        const emptySizes=sizes.some(sizeField=>{
+        const emptySizes=sizes.some(sizeField=>{ //Check if a size field is empty
             if(sizeField.size===0 || sizeField.quantity===0){
                 return true
             }
@@ -165,7 +165,7 @@ console.log(values)
             </select>
             <br/>
 
-            <label><h1>Product Name</h1></label>
+            <label><h1>Name</h1></label>
             <div className="input-group input-group-lg">
                 <input type="text" value={productName} name="productName" onChange={fieldsChange} className="form-control" aria-label="productName" aria-describedby="inputGroup-sizing-lg"/>
             </div>

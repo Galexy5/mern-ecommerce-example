@@ -10,7 +10,7 @@ router.post('/newcategory', authenticateJWT, CategoryController.create);
 
 router.post('/newproduct', authenticateJWT, upload.single('productPhoto'), ProductController.create);
 
-
+router.post('/editproduct', authenticateJWT, upload.single('productPhoto'), ProductController.editProduct);
 
 
 

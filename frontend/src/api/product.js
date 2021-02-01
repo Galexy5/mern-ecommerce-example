@@ -7,3 +7,11 @@ export const createProduct= async (data)=>{
     return response;
 
     }
+
+    export const editProduct= async (data)=>{
+
+        const response = await axios.post('/admin/dashboard/editproduct', data );
+    
+        return response;
+    
+        }

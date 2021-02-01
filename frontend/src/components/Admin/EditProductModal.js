@@ -12,6 +12,8 @@ export default function EditProductModal({product}){
     const {womenCategories} = useSelector(state=>state.womenCategories) ;
     const {menCategories } = useSelector(state=>state.menCategories) ;
 
+  
+
     const [sizeInputs,setSizeInputs] = useState([])
 
 
@@ -28,9 +30,9 @@ export default function EditProductModal({product}){
         price: product.price,
         productPhoto: product.productPhoto
        })     
-
+      
        setSizeInputs(product.sizes)
-   },[product,formData])
+   },[product])
 
 
 
@@ -46,13 +48,7 @@ export default function EditProductModal({product}){
     const [emptyFieldsError,setEmptyFieldsError]=useState('');
 
        /******EVENTS ********/
-    const fieldsChange = (event) =>{
-        setSubmitMessage('');
-        setEmptyFieldsError('');
-        if(event.target.name!=='productPhoto'){
-            setFormData({...formData, [event.target.name]:event.target.value})
-        }     
- }
+
 
 const submitEditProduct = (event)=>{
 
@@ -96,6 +92,26 @@ const submitEditProduct = (event)=>{
 
 }
 
+const fieldsChange = (event) =>{
+    setSubmitMessage('');
+    setEmptyFieldsError('');
+    if(event.target.name!=='productPhoto'){
+
+      
+
+        if(event.target.name==='mainCategory'){
+             event.target.value==='Women' ?  setFormData({...formData, mainCategory:'Women', subCategory: womenCategories[0].sub_category}) : setFormData({...formData, mainCategory:'Men',subCategory: menCategories[0].sub_category})
+        }else{
+            setFormData({...formData, [event.target.name]:event.target.value})
+        }
+        
+        
+        
+        
+    }     
+
+
+}
 
  const productPhotoChange = (event) =>{
     setFormData({...formData, [event.target.name]:event.target.files[0]})
@@ -163,20 +179,26 @@ const removeSize = (index)=>{
                             </select>
 
                         <div className="text-primary"><h5>Sub Category</h5></div>
-                        {subCategory && 
+                        
                             <select name="subCategory" value={subCategory} onChange={fieldsChange} className="form-select form-select-lg mb-3" aria-label="subCategory">
                                 <option selected value={subCategory}>{subCategory}</option>
-                
+                            
                                     {mainCategory==='Women' && mainCategory ? womenCategories && womenCategories.map(womanCat=>(
-                                        <option key={womanCat._id} value={womanCat.category}>{womanCat.subCategory}</option>
+
+                                        
+                                            womanCat.sub_category!==subCategory &&
+                                            <option key={womanCat._id} value={womanCat.category}>{womanCat.sub_category}</option>
+                                     
+                                        
                                     )) :
                                     menCategories && menCategories.map(manCat=>(
-                                        <option key={manCat._id} value={manCat.category}>{manCat.subCategory}</option>
+                                        manCat.sub_category !==subCategory &&
+                                        <option key={manCat._id} value={manCat.category}>{manCat.sub_category}</option>
                                     ))
                                     }
 
                             </select>
-                        }
+                        
                             
 
                         <div className="text-primary"><h5>Name</h5></div>
@@ -224,7 +246,7 @@ const removeSize = (index)=>{
               <div className={submitMessage==='' ? '' : submitMessage==='This product already exists' ? "alert alert-danger" : "alert alert-success"} role="alert">
                   {submitMessage}
               </div>
-                    <button className="btn btn-secondary btn-lg " data-bs-dismiss='modal'>Cancel</button> <button type="submit" className="btn btn-primary btn-lg ">Submit changes</button>
+                    <button className="btn btn-secondary btn-lg " data-bs-dismiss='modal'>Close</button> <button type="submit" className="btn btn-primary btn-lg ">Submit changes</button>
                         </div>
                  </form>   
                 </div>

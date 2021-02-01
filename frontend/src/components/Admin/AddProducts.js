@@ -155,10 +155,10 @@ console.log(values)
             <option selected value="choose">Choose sub category</option>
             
                 {mainCategory==='Women' ? womenCategories && womenCategories.map(womanCat=>(
-                    <option key={womanCat.id} value={womanCat.category}>{womanCat.sub_category}</option>
+                    <option key={womanCat._id} value={womanCat.sub_category}>{womanCat.sub_category}</option>
                 )) :
                 menCategories && menCategories.map(manCat=>(
-                    <option key={manCat.id} value={manCat.category}>{manCat.sub_category}</option>
+                    <option key={manCat._id} value={manCat.sub_category}>{manCat.sub_category}</option>
                 ))
                 }
 

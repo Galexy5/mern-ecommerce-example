@@ -1,6 +1,5 @@
 import {useState , useEffect} from 'react';
 import {editProduct} from '../../api/product';
-// import isEmpty from 'validator/lib/isEmpty';
 import {useSelector} from 'react-redux';
 
 

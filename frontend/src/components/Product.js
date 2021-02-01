@@ -1,35 +1,45 @@
+import EditProductModal from '../components/Admin/EditProductModal';
+import {useSelector} from 'react-redux';
+import {useState,useEffect} from 'react'
+import { isAuthenticated } from '../helpers/auth';
 
 export default function Product (props){
 
- const {product} = props.location.state
+    const [currentProduct,setCurrentProduct]= useState({});
+    const {products} = useSelector(state=>state.products) ;
 
- const sizes= product.sizes.map(s=> {return s.size})
+
+ useEffect(()=>{
+     setCurrentProduct(products.find(p=> p._id===props.location.state.product._id))     
+ },[products])
+
+
+
 
     return(
         <>
-   
-            <div className="row">
+            {currentProduct &&(
+                <div className="row">
                 <div className="col-md-6">
-                    <img src={`/uploads/${product.productPhoto}`} className="img-fluid" alt="product"/>
+                    <img src={`/uploads/${currentProduct.productPhoto}`} className="img-fluid" alt="product"/>
                 </div>
                 <div className="col-md-6">
-                    <h2>{product.name}</h2>
+                    <h2>{currentProduct.name}</h2>
                     <br/>
                     <h3>Price</h3>
-                    <h4>{product.price}<i className="fas fa-euro-sign"/></h4>
+                    <h4>{currentProduct.price}<i className="fas fa-euro-sign"/></h4>
                     <br/>
                     <div className='form-group'>
 											
 											<select
 												className='form-select form-select mb-3 w-50'
 												name='productCategory'
-												// onChange={handleProductChange}
 											>
 												<option value=''>
 													Choose size...
 												</option>
                                                 { 
-                                                sizes.sort().map(size=>(
+                                                currentProduct.sizes && currentProduct.sizes.map(s=> {return s.size}).sort().map(size=>(
                                                 <option value={size}>{size}</option>
                                                 ))
                                                 }
@@ -38,11 +48,20 @@ export default function Product (props){
 										</div>
 
                     <h3>Description</h3>
-                    <p>{product.description}</p>
+                    <p>{currentProduct.description}</p>
+                    {isAuthenticated().role===1 ? 
+                            (<><button className='btn btn-outline-primary' data-bs-toggle="modal" data-bs-target="#editProduct"><i class="fas fa-edit"/>        Edit</button>  
+                            <button className='btn btn-outline-primary'><i class="fas fa-trash-alt"/>       Delete</button></>)
+                            :
+                            (<button className="btn btn-primary">Add to cart</button>)
+                            }
                 </div>
             </div>
-   
 
+            )}
+            
+   
+            {currentProduct && <EditProductModal product={currentProduct}/> }               
         </>
     )
 }
